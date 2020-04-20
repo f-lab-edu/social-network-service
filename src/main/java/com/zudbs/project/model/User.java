@@ -7,18 +7,17 @@ import lombok.Setter;
 import java.util.Date;
 
 @Getter
-@Setter
 public class User {
 
-    private  int id;
+    private int id;
 
-    private  String userID;
+    private String userID;
 
-    private  String password;
+    private String password;
 
-    private  String name;
+    private String name;
 
-    private  char gender;
+    private char gender;
 
     private Date brith;
 }

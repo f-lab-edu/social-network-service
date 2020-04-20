@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 /* Datasource 설정, 쿼리 xml 위치 설정*/
-@Configuration
+@Configuration /* Java config 로 설정해주는 어노테이션 */
 public class DatabaseConfig {
 
     /* SqlSession(SQL 실행 및 트랜잭션 제어)을 생성하는 구성 요소 */
