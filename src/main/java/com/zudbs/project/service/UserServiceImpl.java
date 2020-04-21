@@ -13,7 +13,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void joinUser(User user) {
-
         userMapper.insertUser(user);
+    }
+
+    @Override
+    public boolean deleteUser(User user) {
+        int result = userMapper.deleteUser(user);
+
+        if (result == 0) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }

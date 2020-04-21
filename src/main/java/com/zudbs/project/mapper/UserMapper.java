@@ -5,5 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper /* My-batis Mapper로 등록 */
 public interface UserMapper {
-    void  insertUser(User user);
+
+    void insertUser(User user);
+
+    int deleteUser(User user);
 }
