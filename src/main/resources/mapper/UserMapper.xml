@@ -6,4 +6,10 @@
         INSERT INTO USER (USERID, PASSWORD, NAME, GENDER, BIRTH)
         VALUES (#{userID}, #{password}, #{name}, #{gender}, #{brith})
     </insert>
+
+    <delete id="deleteUser">
+        DELETE FROM USER
+        WHERE USERID = #{userID}
+              AND PASSWORD = #{password}
+    </delete>
 </mapper>
