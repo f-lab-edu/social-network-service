@@ -5,6 +5,8 @@ import com.zudbs.project.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -25,6 +27,18 @@ public class UserServiceImpl implements UserService {
         } else {
             return true;
         }
-
     }
+
+    @Override
+    public boolean login(User user, HttpSession httpSession) {
+        User loginUser = userMapper.selectUser(user);
+
+        if (loginUser == null) {
+            httpSession.setAttribute("user", loginUser);
+            return true;
+        }
+
+        return false;
+    }
+
 }
