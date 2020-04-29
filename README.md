@@ -1,4 +1,4 @@
-**Social Network Service**
+*Social Network Service*
 
 * Facebook을 모티브로한 SNS 프로젝트
 
