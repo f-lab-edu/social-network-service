@@ -10,5 +10,5 @@ public interface UserService {
 
      boolean deleteUser(User user);
 
-     boolean login(User user, HttpSession httpSession);
+     void login(User user, HttpSession httpSession) throws Exception;
 }

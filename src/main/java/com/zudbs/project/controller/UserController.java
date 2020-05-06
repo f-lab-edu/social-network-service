@@ -32,23 +32,24 @@ public class UserController {
     public HttpStatus deleteUser(@ModelAttribute User user) {
         boolean result = userService.deleteUser(user);
 
-        if(result) {
-        return HttpStatus.OK;
+        if (result) {
+            return HttpStatus.OK;
         } else {
-            return  HttpStatus.BAD_REQUEST;
+            return HttpStatus.BAD_REQUEST;
         }
     }
 
     @PostMapping("/login")
-    public  HttpStatus login(@ModelAttribute User user, HttpSession httpSession){
+    public HttpStatus login(@ModelAttribute User user, HttpSession httpSession) {
 
-        if(!userService.login(user,httpSession)) {
-            return  HttpStatus.BAD_REQUEST;
+        try {
+            userService.login(user, httpSession);
+        } catch (Exception e) {
+            return HttpStatus.BAD_REQUEST;
         }
 
         return HttpStatus.OK;
     }
-
 
 
 }

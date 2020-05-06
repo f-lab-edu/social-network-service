@@ -14,9 +14,9 @@
     </delete>
 
     <select id="selectUser" resultType="com.zudbs.project.model.User">
-        SELECT * FROM USER
+        SELECT USERID, NAME, GENDER, BIRTH FROM USER
         WHERE USERID = #{userID}
-              AND PASSWORD = #{password}
+            AND PASSWORD = #{password}
     </select>
 
 </mapper>
