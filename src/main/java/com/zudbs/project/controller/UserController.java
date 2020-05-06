@@ -28,13 +28,14 @@ public class UserController {
 
     @PostMapping("/delete")
     public HttpStatus deleteUser(@ModelAttribute User user) {
-        boolean result = userService.deleteUser(user);
 
-        if(result) {
-        return HttpStatus.OK;
-        } else {
-            return  HttpStatus.BAD_REQUEST;
+        try {
+            userService.deleteUser(user);
+        } catch (Exception e) {
+            return HttpStatus.BAD_REQUEST;
         }
+
+        return HttpStatus.OK;
     }
 
 

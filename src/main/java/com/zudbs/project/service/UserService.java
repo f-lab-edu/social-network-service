@@ -6,5 +6,5 @@ public interface UserService {
 
      void joinUser(User user);
 
-     boolean deleteUser(User user);
+     void deleteUser(User user) throws Exception;
 }

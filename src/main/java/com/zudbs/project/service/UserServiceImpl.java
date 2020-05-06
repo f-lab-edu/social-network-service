@@ -17,13 +17,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(User user) {
+    public void deleteUser(User user) throws Exception {
         int result = userMapper.deleteUser(user);
 
         if (result == 0) {
-            return false;
-        } else {
-            return true;
+            throw new Exception("올바른 사용자가 아닙니다.");
         }
 
     }
