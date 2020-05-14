@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
         int result = userMapper.deleteUser(user);
 
         if (result == 0) {
-            throw new RuntimeException("올바른 사용자가 아닙니다.");
+            throw new IllegalArgumentException("올바른 사용자가 아닙니다.");
         }
 
     }
