@@ -13,7 +13,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void joinUser(User user) {
-
         userMapper.insertUser(user);
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        int result = userMapper.deleteUser(user);
+
+        if (result == 0) {
+            throw new IllegalArgumentException("올바른 사용자가 아닙니다.");
+        }
+
     }
 }

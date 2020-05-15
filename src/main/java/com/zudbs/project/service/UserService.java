@@ -4,5 +4,7 @@ import com.zudbs.project.model.User;
 
 public interface UserService {
 
-     void joinUser(User user);
+    void joinUser(User user);
+
+    void deleteUser(User user);
 }

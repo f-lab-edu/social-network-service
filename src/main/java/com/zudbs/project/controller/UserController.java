@@ -4,10 +4,7 @@ import com.zudbs.project.model.User;
 import com.zudbs.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 /*
@@ -36,5 +33,18 @@ public class UserController {
 
         return HttpStatus.CREATED;
     }
+
+    @PostMapping("/delete")
+    public HttpStatus deleteUser(@ModelAttribute User user) {
+
+        try {
+            userService.deleteUser(user);
+        } catch (Exception e) {
+            return HttpStatus.BAD_REQUEST;
+        }
+
+        return HttpStatus.OK;
+    }
+
 
 }

@@ -11,5 +11,8 @@ Mybatis가 DB에 관한 DataSource 정보를 토대로 SQL문이 정의된 Mappe
 구현되어 있습니다.
 */
 public interface UserMapper {
-    void  insertUser(User user);
+
+    void insertUser(User user);
+
+    int deleteUser(User user);
 }
