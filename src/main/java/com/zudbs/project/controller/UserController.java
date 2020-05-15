@@ -51,5 +51,12 @@ public class UserController {
         return HttpStatus.OK;
     }
 
+    @GetMapping("/logout")
+    public HttpStatus logout(HttpSession httpSession){
+
+        httpSession.invalidate();
+
+        return  HttpStatus.OK;
+    }
 
 }
