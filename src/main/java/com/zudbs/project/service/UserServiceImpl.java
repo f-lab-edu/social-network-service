@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void login(User user, HttpSession httpSession) throws Exception {
+    public void login(User user, HttpSession httpSession) {
         User loginUser = userMapper.selectUser(user);
 
         if (loginUser == null) {
-            throw new Exception("ID 또는 PW가 올바르지 않습니다.");
+            throw new IllegalArgumentException("ID 또는 PW가 올바르지 않습니다.");
         }
 
         httpSession.setAttribute("user", loginUser);
