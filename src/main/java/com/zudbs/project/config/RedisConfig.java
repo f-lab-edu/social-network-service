@@ -69,9 +69,11 @@ public class RedisConfig {
     Redis 데이터 액세스 코드를 단순화하는 도우미 클래스 (커넥션 위에서 값을 조작하는 메서드 제공)
     지정된 객체와 Redis 저장소의 기본 이진 데이터간에 자동 직렬화 / 역 직렬화를 수행합니다.
     기본적으로 객체를 통해 Java 직렬화를 사용합니다 (JdkSerializationRedisSerializer)
-    메모리 서버인 Redis 특성상 메모리 용량이 크지 않기 때문에 핵심만 요약해서 기록하는 형태가 효율적이지만
-    자바 직렬화 시에는 기본적으로 타입에 대한 정보 등 클래스의 메타 정보도 가지고 있기 때문에 상대적을
-    다른 포맷에 비해서 용량이 큰 문제가 발생하기 때문에 자바 직력화를 권장하지 않습니다.
+    Java 직렬화는 직렬화/역직렬화 과정에서 원한는 작업을 할 수 있도록 writeObject()/readObject() 메소드를
+    지원하는데 이때 서버 측에 존재하는 Class들 둥에서 임의의 메소드(주로 "Runtieme.exec")를 실행할 수 있도록
+    작성된 취약한 Class또는 라이브러리를 직렬과/역직렬화에 사용할 경우 readObject()메서드에 Runtime.exec 와 같은
+    실행메서드를 정의하여 역직렬화 단계 동안 응용 프로그램에서 원치 않는 코드가 실행할 수 있게 합니다.
+    결과적으로 신뢰할 수 없는 환경에서는 Java 직렬화를 지양합니다.
     SringTemplate : RedisTemplate 상속받은 클래스로서 문자열에 특화되어 있다.(StringRedisSerializer)
     */
     @Bean
