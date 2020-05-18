@@ -6,9 +6,10 @@ import javax.servlet.http.HttpSession;
 
 public interface UserService {
 
-     void joinUser(User user);
+    void joinUser(User user);
 
-     boolean deleteUser(User user);
+    void login(User user, HttpSession httpSession);
+  
+    void deleteUser(User user);
 
-     void login(User user, HttpSession httpSession);
 }
