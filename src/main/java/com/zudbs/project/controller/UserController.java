@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 /*
 해당 클래스를 웹 요청을 처리하는 컨트롤러로 사용
 요청 매핑 메소드에 @ResponseBody 추가
@@ -29,8 +31,21 @@ public class UserController {
     @PostMapping("/delete")
     public HttpStatus deleteUser(@ModelAttribute User user) {
 
-        try {
+     try {
             userService.deleteUser(user);
+        } catch (Exception e) {
+
+            return HttpStatus.BAD_REQUEST;
+        }
+
+        return HttpStatus.OK;
+    }
+
+    @PostMapping("/login")
+    public HttpStatus login(@ModelAttribute User user, HttpSession httpSession) {
+
+        try {
+            userService.login(user, httpSession);
         } catch (Exception e) {
             return HttpStatus.BAD_REQUEST;
         }
@@ -38,5 +53,12 @@ public class UserController {
         return HttpStatus.OK;
     }
 
+    @GetMapping("/logout")
+    public HttpStatus logout(HttpSession httpSession){
+
+        httpSession.invalidate();
+
+        return  HttpStatus.OK;
+    }
 
 }
