@@ -10,8 +10,10 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
-/* Datasource 설정, 쿼리 xml 위치 설정*/
-@Configuration /* Java config 로 설정해주는 어노테이션 */
+@Configuration
+/*
+ 클래스가 하나 이상의 @Bean메소드를 선언 하고 런타임시 해당 Bean에 대한 정의
+  및 서비스 요청을 생성하기 위해 Spring 컨테이너에서 처리 될 수 있음을 나타내는 어노테이션*/
 public class DatabaseConfig {
 
     /* SqlSession(SQL 실행 및 트랜잭션 제어)을 생성하는 구성 요소 */
