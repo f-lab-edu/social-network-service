@@ -7,6 +7,16 @@
         VALUES (#{userId}, #{friendId}, null )
     </insert>
 
+    <update id="acceptFriend">
+        UPDATE FRIEND SET FOLLOW = true
+        WHERE USERID = #{requestId} AND FRIENDID = #{userId}
+    </update>
+
+    <delete id="rejectFriend">
+        DELETE FROM FRIEND
+        WHERE USERID = #{requestId} AND FRIENDID = #{userId}
+    </delete>
+
 
 
 </mapper>

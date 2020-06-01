@@ -4,10 +4,7 @@ import com.zudbs.project.model.User;
 import com.zudbs.project.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,10 +19,30 @@ public class FriendController {
     @PostMapping("request/{friendId}")
     public HttpStatus requestFriend(@PathVariable String friendId, HttpSession httpSession) {
 
-        User user = (User)httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
 
-        friendService.requestFriend(user.getUserID(),friendId);
+        friendService.requestFriend(user.getUserID(), friendId);
 
         return HttpStatus.CREATED;
+    }
+
+    @PutMapping("request/{requestId}")
+    public HttpStatus acceptFriend(@PathVariable String requestId, HttpSession httpSession) {
+
+        User user = (User) httpSession.getAttribute("user");
+
+        friendService.acceptFriend(requestId, user.getUserID());
+
+        return HttpStatus.OK;
+    }
+
+    @DeleteMapping("request/{requestId}")
+    public HttpStatus rejectFriend(@PathVariable String requestId, HttpSession httpSession) {
+
+        User user = (User) httpSession.getAttribute("user");
+
+        friendService.rejectFriend(requestId, user.getUserID());
+
+        return HttpStatus.OK;
     }
 }
