@@ -17,6 +17,9 @@
         WHERE USERID = #{requestId} AND FRIENDID = #{userId}
     </delete>
 
-
+    <update id="followFriend">
+        UPDATE FRIEND SET FOLLOW = #{follow}
+        WHERE USERID = #{requestId} AND FRIENDID = #{userId}
+    </update>
 
 </mapper>

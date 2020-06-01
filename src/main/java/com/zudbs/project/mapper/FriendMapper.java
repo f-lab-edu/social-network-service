@@ -9,4 +9,6 @@ public interface FriendMapper {
     void acceptFriend(String requestId, String userId);
 
     void rejectFriend(String requestId, String userId);
+
+    void followFriend(String requestId, String userId, boolean follow);
 }
