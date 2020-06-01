@@ -12,6 +12,19 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     public void requestFriend(String userId, String friendId) {
-        friendMapper.requestFriend(userId,friendId);
+
+        friendMapper.requestFriend(userId, friendId);
     }
+
+    @Override
+    public void acceptFriend(String requestId, String userId) {
+        friendMapper.acceptFriend(requestId, userId);
+    }
+
+    @Override
+    public void rejectFriend(String requestId, String userId) {
+        friendMapper.rejectFriend(requestId,userId);
+    }
+
+
 }
