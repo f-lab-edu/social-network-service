@@ -12,4 +12,11 @@
         WHERE USERID = #{userID}
               AND PASSWORD = #{password}
     </delete>
+
+    <select id="selectUser" resultType="com.zudbs.project.model.User">
+        SELECT USERID, NAME, GENDER, BIRTH FROM USER
+        WHERE USERID = #{userID}
+            AND PASSWORD = #{password}
+    </select>
+
 </mapper>

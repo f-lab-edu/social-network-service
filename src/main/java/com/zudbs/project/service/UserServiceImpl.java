@@ -5,6 +5,8 @@ import com.zudbs.project.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -23,6 +25,17 @@ public class UserServiceImpl implements UserService {
         if (result == 0) {
             throw new IllegalArgumentException("올바른 사용자가 아닙니다.");
         }
-
     }
+
+    @Override
+    public void login(User user, HttpSession httpSession) {
+        User loginUser = userMapper.selectUser(user);
+
+        if (loginUser == null) {
+            throw new IllegalArgumentException("ID 또는 PW가 올바르지 않습니다.");
+        }
+
+        httpSession.setAttribute("user", loginUser);
+    }
+
 }
