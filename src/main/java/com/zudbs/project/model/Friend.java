@@ -7,6 +7,6 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class Friend implements Serializable {
+public class Friend {
     private boolean follow;
 }
