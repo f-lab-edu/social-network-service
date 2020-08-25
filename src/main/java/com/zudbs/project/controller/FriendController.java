@@ -1,5 +1,6 @@
 package com.zudbs.project.controller;
 
+import com.zudbs.project.annotation.CheckLogin;
 import com.zudbs.project.model.User;
 import com.zudbs.project.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class FriendController {
     @Autowired
     FriendService friendService;
 
-    /*@PathVariable 메소드 매개 변수가 URI 템플릿 변수에 바인드된다는 어노테이션*/
-    @PostMapping("requests/{friendId}")
+    @CheckLogin
+    @PostMapping("requests/{friendId}") /*@PathVariable 메소드 매개 변수가 URI 템플릿 변수에 바인드된다는 어노테이션*/
     public HttpStatus requestFriend(@PathVariable String friendId, HttpSession httpSession) {
 
         User user = (User)httpSession.getAttribute("user");
