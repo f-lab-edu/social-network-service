@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zudbs.project.mapper.AlarmMapper">
+    <insert id="registerAlarm">
+        INSERT INTO ALARM (USERID, OPPONETID, TIME, ALARMTYPE, ALARMSTATUS)
+        VALUES (#{userId}, #{opponentId}, #{time}, #{alarmType}, false )
+    </insert>
+
+    <select id="getAlarmList" resultType="com.zudbs.project.model.Alarm">
+        SELECT ID, USERID, OPPONETID, TIME,ALARMTYPE, ALARMSTATUS
+        FROM ALARM
+        WHERE USERID = #{userID}
+    </select>
+
+    <select id="getAlarm" resultType="com.zudbs.project.model.Alarm">
+        SELECT ID, USERID, OPPONETID, TIME, ALARMTYPE, ALARMSTATUS
+        FROM ALARM
+        WHERE ID = #{alarmId}
+    </select>
+
+    <update id="readAlarm">
+        UPDATE ALARM SET ALARMSTATUS = TRUE WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteAlarm">
+        DELETE FROM ALARM WHERE ID = #{id}
+    </delete>
+</mapper>

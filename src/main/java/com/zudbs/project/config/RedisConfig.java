@@ -2,7 +2,6 @@ package com.zudbs.project.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -25,20 +24,17 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
   Redis Lib
    jedis
     - thread-safe하지 않기 때문에 스레드 안전 네트워크 연결 풀인 JedisPool을 사용해야한다.
-      그러나 물리적인 비용의(connection할 인스턴스를 미리 만들어놓고 대기하는 연결비용의 증가) 증가가 따른다.
+      그러나 물리적인 비용의(connection 인스턴스를 미리 만들어놓고 대기하는 연결비용의 증가) 증가가 따른다.
 
    Lettuce
     - Netty 기반의 Redis Client로 비동기로 요청을 처리하여 성능에 장점
 
    Netty
-    - 유지 관리가 용이한 고성능 프로토콜 서버와 클라이언트를 식속하게 개발하기 위한
+    - 유지 관리가 용이한 고성능 프로토콜 서버와 클라이언트를 신속하게 개발하기 위한
       비동기식 이벤트 기반 네트워크 애플리케이션 프레임워크이다. Netty는 자바 nio의
       selector 개념을 이용하여 적은 스레드로 많은 요청을 처리하고 ByteBuf는 자바의
       바이트 버퍼와 다르게 프레임워크 레벨의 바이트 버퍼풀을 제공하고 이를 통해 생성된
       바이트 버퍼를 재사용하여 GC부하를 최소화한다.
-
-
-
 
   @EnableRedisHttpSession
    Filter를 구현한 springSessionRepositoryFilter라는 이름의 Spring Bean을 생성합니다.

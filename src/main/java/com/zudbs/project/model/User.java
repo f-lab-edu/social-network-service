@@ -1,6 +1,5 @@
 package com.zudbs.project.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
