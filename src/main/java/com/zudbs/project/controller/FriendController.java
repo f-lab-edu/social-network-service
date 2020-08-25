@@ -20,6 +20,7 @@ public class FriendController {
 
     /*@PathVariable 메소드 매개 변수가 URI 템플릿 변수에 바인드된다는 어노테이션*/
     @PostMapping("requests/{friendId}")
+
     public HttpStatus requestFriend(@PathVariable String friendId, HttpSession httpSession) {
 
         User user = (User)httpSession.getAttribute("user");
