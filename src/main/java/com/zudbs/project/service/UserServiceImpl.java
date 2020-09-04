@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("ID 또는 PW가 올바르지 않습니다.");
         }
 
-        httpSession.setAttribute("user", loginUser);
+        httpSession.setAttribute("user", loginUser.getUserID());
     }
 
 }
