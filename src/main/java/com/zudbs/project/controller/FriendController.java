@@ -1,8 +1,7 @@
 package com.zudbs.project.controller;
 
-import com.zudbs.project.model.User;
 import com.zudbs.project.service.FriendService;
-import com.zudbs.project.util.SessionUtil;
+import com.zudbs.project.util.SessionKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,7 @@ public class FriendController {
     @PostMapping("request/{friendId}")
     public HttpStatus requestFriend(@PathVariable String friendId, HttpSession httpSession) {
 
-        String userId = (String) httpSession.getAttribute(SessionUtil.LOGIN_SESSION_KEY);
+        String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_SESSION_KEY);
 
         friendService.requestFriend(userId, friendId);
 
