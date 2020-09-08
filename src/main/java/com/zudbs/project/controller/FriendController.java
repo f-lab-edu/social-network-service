@@ -22,7 +22,7 @@ public class FriendController {
     @PostMapping("request/{friendId}")
     public HttpStatus requestFriend(@PathVariable String friendId, HttpSession httpSession) {
 
-        String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_SESSION_KEY);
+        String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
 
         friendService.requestFriend(userId, friendId);
 
