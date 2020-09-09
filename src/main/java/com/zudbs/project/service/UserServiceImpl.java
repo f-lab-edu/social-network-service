@@ -2,6 +2,7 @@ package com.zudbs.project.service;
 
 import com.zudbs.project.mapper.UserMapper;
 import com.zudbs.project.model.User;
+import com.zudbs.project.util.SessionKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("ID 또는 PW가 올바르지 않습니다.");
         }
 
-        httpSession.setAttribute("user", loginUser);
+        httpSession.setAttribute(SessionKeys.LOGIN_USER_ID, loginUser.getUserID());
     }
 
 }
