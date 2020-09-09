@@ -1,6 +1,7 @@
 package com.zudbs.project.aop;
 
 import com.zudbs.project.model.User;
+import com.zudbs.project.util.SessionKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -40,11 +41,10 @@ public class CheckLoginAspect {
     @Before("@annotation(com.zudbs.project.annotation.CheckLogin)")
     public void checkLogin(JoinPoint joinPoint) throws Throwable {
 
-        User user = (User) session.getAttribute("user");
+        String userId = (String) session.getAttribute(SessionKeys.LOGIN_USER_ID);
 
-        if (user == null) {
-            throw new HttpStatusCodeException(HttpStatus.UNAUTHORIZED) {
-            };
+        if (userId == null) {
+            throw new HttpStatusCodeException(HttpStatus.UNAUTHORIZED) {};
         }
     }
 }
