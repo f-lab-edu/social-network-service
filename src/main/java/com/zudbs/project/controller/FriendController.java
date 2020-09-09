@@ -1,5 +1,6 @@
 package com.zudbs.project.controller;
 
+import com.zudbs.project.annotation.CheckLogin;
 import com.zudbs.project.service.FriendService;
 import com.zudbs.project.util.SessionKeys;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +27,24 @@ public class FriendController {
         return HttpStatus.CREATED;
     }
 
+    @CheckLogin
     @PutMapping("request/{requestId}")
     public HttpStatus acceptFriend(@PathVariable String requestId, HttpSession httpSession) {
 
-        User user = (User) httpSession.getAttribute("user");
+        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
 
-        friendService.acceptFriend(requestId, user.getUserID());
+        friendService.acceptFriend(requestId, userID);
 
         return HttpStatus.OK;
     }
 
+    @CheckLogin
     @DeleteMapping("request/{requestId}")
     public HttpStatus rejectFriend(@PathVariable String requestId, HttpSession httpSession) {
 
-        User user = (User) httpSession.getAttribute("user");
+        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
 
-        friendService.rejectFriend(requestId, user.getUserID());
+        friendService.rejectFriend(requestId, userID);
 
         return HttpStatus.OK;
     }

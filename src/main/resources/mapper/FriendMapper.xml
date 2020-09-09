@@ -17,6 +17,10 @@
         WHERE USERID = #{requestId} AND FRIENDID = #{userId}
     </delete>
 
-
+    <insert id="saveRejectHistory">
+        INSERT INTO FRIEND_HISTORY_REJECT (REJECTID, REQUESTID, COUNT)
+        VALUES (#{rejectId}, #{requestId}, 1)
+        ON DUPLICATE KEY UPDATE COUNT = COUNT + 1;
+    </insert>
 
 </mapper>
