@@ -5,6 +5,7 @@ import com.zudbs.project.mapper.FriendMapper;
 import com.zudbs.project.model.Alarm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +19,7 @@ public class FriendServiceImpl implements FriendService {
     @Autowired
     private FriendMapper friendMapper;
 
+    @Transactional
     @Override
     public void requestFriend(String userId, String friendId) {
         friendMapper.requestFriend(userId, friendId);
