@@ -6,6 +6,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 
@@ -24,7 +25,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
   Redis Lib
    jedis
     - thread-safe하지 않기 때문에 스레드 안전 네트워크 연결 풀인 JedisPool을 사용해야한다.
-      그러나 물리적인 비용의(connection 인스턴스를 미리 만들어놓고 대기하는 연결비용의 증가) 증가가 따른다.
+      그러나 물리적인 비용의(connection할 인스턴스를 미리 만들어놓고 대기하는 연결비용) 증가가 따른다.
 
    Lettuce
     - Netty 기반의 Redis Client로 비동기로 요청을 처리하여 성능에 장점
@@ -77,6 +78,11 @@ public class RedisConfig {
 
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory());
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        /*
+        StringRedisSerializer는 키 값을 직렬화할 때 String.getBytes() 사용하여
+        JDK 직렬화를 사용할 때처럼 불필요한 타입정보가 붙지 않는다.
+        */
 
         return redisTemplate;
     }
