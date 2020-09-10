@@ -20,13 +20,10 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     public void requestFriend(String userId, String friendId) {
-        friendMapper.requestFriend(userId,friendId);
+        friendMapper.requestFriend(userId, friendId);
 
-        Alarm alarm =new Alarm();
-        alarm.setUserId(userId);
-        alarm.setOpponentId(friendId);
-        alarm.setAlarmType(AlarmType.REQUEST_FRIEND);
-        alarm.setTime(LocalDateTime.now());
+        Alarm alarm = new Alarm(userId, friendId, AlarmType.REQUEST_FRIEND,
+                LocalDateTime.now(), false);
 
         alarmService.registerAlarm(alarm);
     }
