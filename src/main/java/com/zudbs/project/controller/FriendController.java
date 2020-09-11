@@ -28,7 +28,7 @@ public class FriendController {
     }
 
     @CheckLogin
-    @PutMapping("request/{requestId}")
+    @PutMapping("requests/{requestId}")
     public HttpStatus acceptFriend(@PathVariable String requestId, HttpSession httpSession) {
 
         String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
@@ -39,7 +39,7 @@ public class FriendController {
     }
 
     @CheckLogin
-    @DeleteMapping("request/{requestId}")
+    @DeleteMapping("requests/{requestId}")
     public HttpStatus rejectFriend(@PathVariable String requestId, HttpSession httpSession) {
 
         String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
