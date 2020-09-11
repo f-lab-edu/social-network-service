@@ -2,6 +2,7 @@ package com.zudbs.project.aop;
 
 import com.zudbs.project.annotation.SessionVariable;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class SessionVariableAspect {
     @Autowired
     private HttpSession session;
 
-
+    @Around("execution(* *(.., @com.zudbs.project.annotation.SessionVariable (*), ..))")
     public Object setSessionVariable(ProceedingJoinPoint joinPoint) throws Throwable {
 
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
