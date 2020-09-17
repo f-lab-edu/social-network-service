@@ -7,10 +7,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-/*
-Alarm 객체는 수정할 경우가 없는 클래스이다.
-Setter을 작성하지 않고 immutable(불변객체)로 구현한다.
-*/
 @Getter
 public class Alarm {
 
@@ -24,19 +20,20 @@ public class Alarm {
 
     private AlarmType alarmType;
 
+    @Setter
     private boolean alarmStatus;
 
     public Alarm(int id, String userId, String opponentId, AlarmType alarmType, LocalDateTime time, boolean alarmStatus) {
+        this(userId, opponentId, alarmType, time, alarmStatus);
         this.id = id;
+    }
+
+    public Alarm(String userId, String opponentId, AlarmType alarmType, LocalDateTime time, boolean alarmStatus) {
         this.userId = userId;
         this.opponentId = opponentId;
         this.alarmType = alarmType;
         this.time = time;
         this.time = time;
         this.alarmStatus = alarmStatus;
-    }
-
-    public Alarm(String userId, String opponentId, AlarmType alarmType, LocalDateTime time, boolean alarmStatus) {
-        this(-1, userId, opponentId, alarmType, time, alarmStatus);
     }
 }
