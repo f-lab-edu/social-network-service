@@ -32,7 +32,7 @@ public class SessionVariableAspect {
             SessionVariable sessionVariable = parameter.getAnnotation(SessionVariable.class);
 
             if (sessionVariable != null) {
-                args[i] = session.getAttribute(sessionVariable.value());
+                args[i] = session.getAttribute(sessionVariable.value().getkey());
             }
         }
 
