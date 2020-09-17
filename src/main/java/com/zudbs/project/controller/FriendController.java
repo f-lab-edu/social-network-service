@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-
 @RestController
 @RequestMapping("/friends")
 public class FriendController {
@@ -36,31 +34,25 @@ public class FriendController {
 
     @CheckLogin
     @PutMapping("requests/{requestId}")
-    public HttpStatus acceptFriend(@PathVariable String requestId, HttpSession httpSession) {
+    public HttpStatus acceptFriend(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable String requestId) {
 
-        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
-
-        friendService.acceptFriend(requestId, userID);
+        friendService.acceptFriend(requestId, userId);
 
         return HttpStatus.OK;
     }
 
     @CheckLogin
     @DeleteMapping("requests/{requestId}")
-    public HttpStatus rejectFriend(@PathVariable String requestId, HttpSession httpSession) {
+    public HttpStatus rejectFriend(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable String requestId) {
 
-        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
-
-        friendService.rejectFriend(requestId, userID);
+        friendService.rejectFriend(requestId, userId);
 
         return HttpStatus.OK;
     }
 
     @CheckLogin
     @PutMapping("follows/{requestId}")
-    public HttpStatus followFriend(@PathVariable String requestId, @RequestParam boolean follow, HttpSession httpSession) {
-
-        String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
+    public HttpStatus followFriend(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable String requestId, @RequestParam boolean follow) {
 
         friendService.followFriend(requestId, userId, follow);
 
