@@ -6,10 +6,7 @@ import com.zudbs.project.service.FriendService;
 import com.zudbs.project.util.SessionKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -36,4 +33,39 @@ public class FriendController {
 
         return HttpStatus.CREATED;
     }
+
+    @CheckLogin
+    @PutMapping("requests/{requestId}")
+    public HttpStatus acceptFriend(@PathVariable String requestId, HttpSession httpSession) {
+
+        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
+
+        friendService.acceptFriend(requestId, userID);
+
+        return HttpStatus.OK;
+    }
+
+    @CheckLogin
+    @DeleteMapping("requests/{requestId}")
+    public HttpStatus rejectFriend(@PathVariable String requestId, HttpSession httpSession) {
+
+        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
+
+        friendService.rejectFriend(requestId, userID);
+
+        return HttpStatus.OK;
+    }
+
+    @CheckLogin
+    @PutMapping("follows/{requestId}")
+    public HttpStatus followFriend(@PathVariable String requestId, @RequestParam boolean follow, HttpSession httpSession) {
+
+        String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
+
+        friendService.followFriend(requestId, userId, follow);
+
+        return HttpStatus.OK;
+    }
+
 }
+

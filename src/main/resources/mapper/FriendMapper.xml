@@ -7,6 +7,25 @@
         VALUES (#{userId}, #{friendId}, null )
     </insert>
 
+    <update id="acceptFriend">
+        UPDATE FRIEND SET FOLLOW = true
+        WHERE USERID = #{requestId} AND FRIENDID = #{userId}
+    </update>
 
+    <delete id="rejectFriend">
+        DELETE FROM FRIEND
+        WHERE USERID = #{requestId} AND FRIENDID = #{userId}
+    </delete>
+
+    <insert id="saveRejectHistory">
+        INSERT INTO FRIEND_HISTORY_REJECT (REJECTID, REQUESTID, COUNT)
+        VALUES (#{rejectId}, #{requestId}, 1)
+        ON DUPLICATE KEY UPDATE COUNT = COUNT + 1;
+    </insert>
+
+   <update id="followFriend">
+        UPDATE FRIEND SET FOLLOW = #{follow}
+        WHERE USERID = #{requestId} AND FRIENDID = #{userId}
+    </update>
 
 </mapper>
