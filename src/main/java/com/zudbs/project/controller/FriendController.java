@@ -48,5 +48,17 @@ public class FriendController {
 
         return HttpStatus.OK;
     }
+
+    @CheckLogin
+    @PutMapping("follows/{requestId}")
+    public HttpStatus followFriend(@PathVariable String requestId, @RequestParam boolean follow, HttpSession httpSession) {
+
+        String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
+
+        friendService.followFriend(requestId, userId, follow);
+
+        return HttpStatus.OK;
+    }
+
 }
 

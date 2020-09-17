@@ -23,4 +23,9 @@
         ON DUPLICATE KEY UPDATE COUNT = COUNT + 1;
     </insert>
 
+   <update id="followFriend">
+        UPDATE FRIEND SET FOLLOW = #{follow}
+        WHERE USERID = #{requestId} AND FRIENDID = #{userId}
+    </update>
+
 </mapper>

@@ -11,4 +11,6 @@ public interface FriendMapper {
     void rejectFriend(String requestId, String userId);
 
     void saveRejectHistory(String requestId, String rejectId);
+
+    void followFriend(String requestId, String userId, boolean follow);
 }

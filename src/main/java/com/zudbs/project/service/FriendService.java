@@ -8,4 +8,6 @@ public interface FriendService {
 
     void rejectFriend(String requestId, String userId);
 
+    void followFriend(String requestId, String userId, boolean follow);
+
 }

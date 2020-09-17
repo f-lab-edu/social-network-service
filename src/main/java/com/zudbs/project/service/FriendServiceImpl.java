@@ -39,4 +39,9 @@ public class FriendServiceImpl implements FriendService {
         friendMapper.saveRejectHistory(requestId, userId);
     }
 
+    @Override
+    public void followFriend(String requestId, String userId, boolean follow) {
+        friendMapper.followFriend(requestId,userId, follow);
+    }
+
 }
