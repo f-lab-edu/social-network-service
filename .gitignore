@@ -32,4 +32,4 @@ build/
 
 ### Credential ###
 applicationFCM.properties
-fcmServiceAccountKey.json
+firebase_service_key.json
