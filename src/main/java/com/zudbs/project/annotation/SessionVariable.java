@@ -11,5 +11,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SessionVariable {
 
-    public SessionKey value() default SessionKey.NONE;
+    public SessionKey value();
 }
