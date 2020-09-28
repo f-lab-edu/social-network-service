@@ -2,7 +2,8 @@ package com.zudbs.project.controller;
 
 import com.zudbs.project.model.User;
 import com.zudbs.project.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zudbs.project.service.FCMService;
+import com.zudbs.project.util.SessionKeys;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,14 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/users") /* 요청 URL과 매핑하기위한 어노테이션 */
 public class UserController {
 
-    @Autowired /* Bean을 자동으로 주입해주기 위한 어노테이션 */
     private UserService userService;
+    private FCMService fcmService;
+
+    public UserController(UserService userService, FCMService fcmService) {
+        this.userService = userService;
+        this.fcmService = fcmService;
+    }
+
 
     @PostMapping("/join") /* @RequestMapping + RequestMethod.POST */
     public HttpStatus joinUser(@ModelAttribute User user) {
@@ -39,7 +46,7 @@ public class UserController {
     @PostMapping("/delete")
     public HttpStatus deleteUser(@ModelAttribute User user) {
 
-     try {
+        try {
             userService.deleteUser(user);
         } catch (Exception e) {
 
@@ -62,11 +69,14 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    public HttpStatus logout(HttpSession httpSession){
+    public HttpStatus logout(HttpSession httpSession) {
+
+        String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
+        fcmService.removeToken(userId);
 
         httpSession.invalidate();
 
-        return  HttpStatus.OK;
+        return HttpStatus.OK;
     }
 
 }

@@ -7,6 +7,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.WebpushConfig;
 import com.google.firebase.messaging.WebpushNotification;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,10 @@ import java.util.Map;
 
 
 @Service
-public class FCMServiceImpl implements FCMService {
+public class FCMService {
 
-    private String firebaseConfigPath = "firebase/firebase_service_key.json";
+    @Value("${firebaseConfigPath}")
+    private String firebaseConfigPath;
 
     private Map<String, String> tokenMap = new HashMap<>();
 
