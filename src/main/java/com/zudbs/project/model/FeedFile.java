@@ -1,7 +1,10 @@
 package com.zudbs.project.model;
 
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 public class FeedFile {
     int id;
 
@@ -11,7 +14,6 @@ public class FeedFile {
 
     String storedFileName;
 
-    int FileSize;
+    long FileSize;
 
-    LocalDateTime date;
 }

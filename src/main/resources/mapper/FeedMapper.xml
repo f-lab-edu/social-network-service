@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zudbs.project.mapper.FeedMapper">
-    <insert id="createFeed">
-
+    <insert id="registerFeed" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO FEED (USERID, CONTENT, DATETIME, HASFILE)
+        VALUES (#{userId}, #{content}, #{dateTime}, #{hasFile} )
     </insert>
 
 
