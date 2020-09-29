@@ -2,7 +2,7 @@ package com.zudbs.project.controller;
 
 import com.zudbs.project.model.User;
 import com.zudbs.project.service.UserService;
-import com.zudbs.project.service.FCMService;
+import com.zudbs.project.service.FCMPushServiceImpl;
 import com.zudbs.project.util.SessionKeys;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +27,11 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     private UserService userService;
-    private FCMService fcmService;
+    private FCMPushServiceImpl fcmPushServiceImpl;
 
-    public UserController(UserService userService, FCMService fcmService) {
+    public UserController(UserService userService, FCMPushServiceImpl fcmPushServiceImpl) {
         this.userService = userService;
-        this.fcmService = fcmService;
+        this.fcmPushServiceImpl = fcmPushServiceImpl;
     }
 
 
@@ -72,7 +72,7 @@ public class UserController {
     public HttpStatus logout(HttpSession httpSession) {
 
         String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
-        fcmService.removeToken(userId);
+        fcmPushServiceImpl.removeReceiver(userId);
 
         httpSession.invalidate();
 

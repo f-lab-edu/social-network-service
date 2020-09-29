@@ -15,15 +15,16 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 @Service
-public class FCMService {
+public class FCMPushServiceImpl implements PushMessageService {
 
     @Value("${firebaseConfigPath}")
     private String firebaseConfigPath;
 
-    private Map<String, String> tokenMap = new HashMap<>();
+    private Map<String, String> tokenMap = new ConcurrentHashMap<>();
 
     @PostConstruct //의존성 주입 후 초기화를 수행하는 메서드
     public void initialize() throws IOException {
@@ -38,18 +39,18 @@ public class FCMService {
 
     }
 
-    public void registerToken(String userId, String token) {
+    public void registerReceiver(String userId, String receiver) {
 
-        tokenMap.put(userId, token);
+        tokenMap.put(userId, receiver);
     }
 
-    public void removeToken(String userId) {
+    public void removeReceiver(String userId) {
         tokenMap.remove(userId);
     }
 
-    public void sendPushMessage(String token, String title, String content) {
+    public void sendPushMessage(String reciver, String title, String content) {
         Message message = Message.builder()
-                .setToken(token)
+                .setToken(reciver)
                 .setWebpushConfig(
                         WebpushConfig.builder()
                                 .setNotification(new WebpushNotification(title, content))

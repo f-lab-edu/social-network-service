@@ -1,6 +1,7 @@
 package com.zudbs.project.service;
 
 import java.util.List;
+
 import com.zudbs.project.model.Alarm;
 
 public interface AlarmService {

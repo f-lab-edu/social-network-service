@@ -1,29 +1,27 @@
 package com.zudbs.project.controller;
 
 import com.zudbs.project.annotation.CheckLogin;
-import com.zudbs.project.service.FCMService;
+import com.zudbs.project.service.PushMessageService;
 import com.zudbs.project.util.SessionKeys;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/notifications")
-public class FCMController {
+public class PushMessageController {
 
-    private FCMService fcmService;
-
-    public FCMController(FCMService fcmService) {
-        this.fcmService = fcmService;
-    }
+    private PushMessageService pushMessageService;
 
     @CheckLogin
-    @PostMapping("register")
+    @PostMapping
     public HttpStatus registerToken(@RequestBody String token, HttpSession httpSession) {
 
         String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
-        fcmService.registerToken(userID, token);
+        pushMessageService.registerReceiver(userID, token);
 
         return HttpStatus.OK;
     }
