@@ -43,4 +43,13 @@ public class FeedController {
         return ResponseEntity.ok(feed);
     }
 
+    @CheckLogin
+    @GetMapping("/{userId}")
+    public ResponseEntity< List<Feed> > getFeedList(@PathVariable String userId) {
+
+        List<Feed> feedList = feedService.getFeedList(userId);
+
+        return ResponseEntity.ok(feedList);
+    }
+
 }

@@ -14,11 +14,16 @@ import java.util.List;
 public class FeedServiceImpl implements FeedService {
 
     private FeedFileService feedFileService;
+
     private FeedMapper feedMapper;
 
     @Transactional
     @Override
     public void registerFeed(Feed feed, List<MultipartFile> files) {
+
+        if (files.size() != 0) {
+            feed.setHasFile(true);
+        }
 
         feedMapper.registerFeed(feed);
 
@@ -30,11 +35,30 @@ public class FeedServiceImpl implements FeedService {
 
         Feed feed = feedMapper.getFeed(feedId);
 
-        if (feed.isHasFile()) {
-            feed.setFiles(feedFileService.getFeedFiles(feedId));
-        }
+        loadFeedFile(feed);
 
         return feed;
     }
+
+    @Override
+    public List<Feed> getFeedList(String userId) {
+
+        List<Feed> feedList = feedMapper.getFeedList(userId);
+
+        for(Feed feed : feedList){
+
+            loadFeedFile(feed);
+        }
+
+        return feedList;
+    }
+
+    public void loadFeedFile(Feed feed){
+
+        if (feed.isHasFile()) {
+            feed.setFiles(feedFileService.getFeedFiles(feed.getId()));
+        }
+    }
+
 
 }

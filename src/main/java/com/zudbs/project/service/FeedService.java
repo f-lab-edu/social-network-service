@@ -10,4 +10,6 @@ public interface FeedService {
     void registerFeed(Feed feed, List<MultipartFile> files);
 
     Feed getFeed(int feedId);
+
+    List<Feed> getFeedList(String userId);
 }
