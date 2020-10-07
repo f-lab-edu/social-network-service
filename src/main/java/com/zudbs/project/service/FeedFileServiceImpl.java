@@ -56,6 +56,19 @@ public class FeedFileServiceImpl implements FeedFileService {
         return files;
     }
 
+    @Override
+    public void updateFeedFiles(int feedId, List<MultipartFile> files) {
+
+        feedFileMapper.removeFeedFiles(feedId);
+
+        saveFiles(feedId, files);
+
+    }
+
+    @Override
+    public void deleteFeedFiles(int feedId) {
+        feedFileMapper.removeFeedFiles(feedId);
+    }
 
 }
 

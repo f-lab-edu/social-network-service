@@ -10,4 +10,8 @@ public interface FeedFileService {
     void saveFiles(int feedId, List<MultipartFile> files);
 
     List<File> getFeedFiles(int feedId);
+
+    void updateFeedFiles(int feedId, List<MultipartFile> files);
+
+    void deleteFeedFiles(int feedId);
 }

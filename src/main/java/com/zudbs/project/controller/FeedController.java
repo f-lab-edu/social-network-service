@@ -24,10 +24,9 @@ public class FeedController {
 
     @CheckLogin
     @PostMapping
-    public HttpStatus register(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, Feed feed, List<MultipartFile> files) {
+    public HttpStatus register(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, String content, List<MultipartFile> files) {
 
-        feed.setUserId(userId);
-        feed.setDateTime(LocalDateTime.now());
+        Feed feed = new Feed(userId, LocalDateTime.now(), content, files.size() != 0);
 
         feedService.registerFeed(feed, files);
 
@@ -35,21 +34,41 @@ public class FeedController {
     }
 
     @CheckLogin
-    @GetMapping("/{feedId}")
-    public ResponseEntity<Feed> getFeed(@PathVariable int feedId) {
+    @GetMapping("/{userId}/{feedId}")
+    public ResponseEntity<Feed> getFeed(@PathVariable String userId, @PathVariable int feedId) {
 
-        Feed feed = feedService.getFeed(feedId);
+        Feed feed = feedService.getFeed(userId, feedId);
 
         return ResponseEntity.ok(feed);
     }
 
     @CheckLogin
-    @GetMapping("/{userId}")
-    public ResponseEntity< List<Feed> > getFeedList(@PathVariable String userId) {
+    @GetMapping("/{userId}/list")
+    public ResponseEntity<List<Feed>> getFeedList(@PathVariable String userId) {
 
         List<Feed> feedList = feedService.getFeedList(userId);
 
         return ResponseEntity.ok(feedList);
+    }
+
+    @CheckLogin
+    @PutMapping("/{userId}/{feedId}")
+    public HttpStatus updateFeed(@PathVariable String userId, @PathVariable int feedId, String content, List<MultipartFile> files) {
+
+        Feed feed = new Feed(feedId, userId, LocalDateTime.now(), content, files.size() != 0);
+
+        feedService.updateFeed(feed, files);
+
+        return HttpStatus.OK;
+    }
+
+    @CheckLogin
+    @DeleteMapping("/{userId}/{feedId}")
+    public HttpStatus deleteFeed(@PathVariable String userId, @PathVariable int feedId) {
+
+        feedService.deleteFeed(userId, feedId);
+
+        return HttpStatus.OK;
     }
 
 }

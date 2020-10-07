@@ -21,19 +21,15 @@ public class FeedServiceImpl implements FeedService {
     @Override
     public void registerFeed(Feed feed, List<MultipartFile> files) {
 
-        if (files.size() != 0) {
-            feed.setHasFile(true);
-        }
-
         feedMapper.registerFeed(feed);
 
         feedFileService.saveFiles(feed.getId(), files);
     }
 
     @Override
-    public Feed getFeed(int feedId) {
+    public Feed getFeed(String userId, int feedId) {
 
-        Feed feed = feedMapper.getFeed(feedId);
+        Feed feed = feedMapper.getFeed(userId, feedId);
 
         loadFeedFile(feed);
 
@@ -45,7 +41,7 @@ public class FeedServiceImpl implements FeedService {
 
         List<Feed> feedList = feedMapper.getFeedList(userId);
 
-        for(Feed feed : feedList){
+        for (Feed feed : feedList) {
 
             loadFeedFile(feed);
         }
@@ -53,7 +49,25 @@ public class FeedServiceImpl implements FeedService {
         return feedList;
     }
 
-    public void loadFeedFile(Feed feed){
+    @Transactional
+    @Override
+    public void updateFeed(Feed feed, List<MultipartFile> files) {
+
+        feedMapper.updateFeed(feed);
+
+        feedFileService.updateFeedFiles(feed.getId(), files);
+    }
+
+    @Transactional
+    @Override
+    public void deleteFeed(String userId, int feedId) {
+
+        feedMapper.deleteFeed(userId, feedId);
+
+        feedFileService.deleteFeedFiles(feedId);
+    }
+
+    public void loadFeedFile(Feed feed) {
 
         if (feed.isHasFile()) {
             feed.setFiles(feedFileService.getFeedFiles(feed.getId()));

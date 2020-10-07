@@ -11,4 +11,6 @@ public interface FeedFileMapper {
     void saveFeedFile(FeedFile file);
 
     List<FeedFile> getFeedFiles(int feedId);
+
+    void removeFeedFiles(int feedId);
 }

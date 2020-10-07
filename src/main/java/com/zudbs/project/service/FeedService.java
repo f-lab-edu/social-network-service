@@ -9,7 +9,11 @@ public interface FeedService {
 
     void registerFeed(Feed feed, List<MultipartFile> files);
 
-    Feed getFeed(int feedId);
+    Feed getFeed(String userId, int feedId);
 
     List<Feed> getFeedList(String userId);
+
+    void updateFeed(Feed feed, List<MultipartFile> files);
+
+    void deleteFeed(String userId, int feedId);
 }

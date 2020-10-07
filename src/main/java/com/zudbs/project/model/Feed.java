@@ -11,6 +11,7 @@ import java.util.List;
 @Setter
 public class Feed {
 
+
     private int id;
 
     private String userId;
@@ -22,4 +23,18 @@ public class Feed {
     private boolean hasFile;
 
     private List<File> files;
+
+    public Feed(int id, String userId, LocalDateTime dateTime, String content, boolean hasFile) {
+        this(userId, dateTime, content, hasFile);
+        this.id = id;
+    }
+
+    public Feed(String userId, LocalDateTime dateTime, String content, boolean hasFile) {
+        this.userId = userId;
+        this.dateTime = dateTime;
+        this.content = content;
+        this.hasFile = hasFile;
+    }
+
+
 }
