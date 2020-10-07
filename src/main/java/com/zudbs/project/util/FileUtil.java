@@ -18,4 +18,9 @@ public class FileUtil {
         }
     }
 
+    public static File LoadFile(String path) {
+
+        return new File(path);
+    }
+
 }

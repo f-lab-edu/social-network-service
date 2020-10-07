@@ -6,4 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface FeedMapper {
     void registerFeed(Feed feed);
+
+    Feed getFeed(int feedId);
+
 }

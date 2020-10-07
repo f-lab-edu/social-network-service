@@ -7,6 +7,9 @@
         VALUES (#{userId}, #{content}, #{dateTime}, #{hasFile} )
     </insert>
 
-
+    <select id="getFeed" resultType="com.zudbs.project.model.Feed" >
+        SELECT USERID, CONTENT, DATETIME, HASFILE FROM FEED
+        WHERE ID =#{feedId}
+    </select>
 
 </mapper>

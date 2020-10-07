@@ -20,11 +20,21 @@ public class FeedServiceImpl implements FeedService {
     @Override
     public void registerFeed(Feed feed, List<MultipartFile> files) {
 
-        if (files.size() != 0) {
-            feed.setHasFile(true);
+        feedMapper.registerFeed(feed);
+
+        feedFileService.saveFiles(feed.getId(), files);
+    }
+
+    @Override
+    public Feed getFeed(int feedId) {
+
+        Feed feed = feedMapper.getFeed(feedId);
+
+        if (feed.isHasFile()) {
+            feed.setFiles(feedFileService.getFeedFiles(feedId));
         }
 
-        feedMapper.registerFeed(feed);
-        feedFileService.saveFile(files, feed.getId());
+        return feed;
     }
+
 }

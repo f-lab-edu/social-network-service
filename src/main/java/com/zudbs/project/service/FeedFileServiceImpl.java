@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,15 +23,14 @@ public class FeedFileServiceImpl implements FeedFileService {
     @Autowired
     private FeedFileMapper feedFileMapper;
 
-
     @Override
-    public void saveFile(List<MultipartFile> files, int feedId) {
+    public void saveFiles(int feedId, List<MultipartFile> files) {
 
         for (int index = 0; index < files.size(); index++) {
 
             MultipartFile file = files.get(index);
 
-            String saveFileName = String.format("%d_%s",feedId, file.getOriginalFilename());
+            String saveFileName = String.format("%d_%d_%s", feedId, index, file.getOriginalFilename());
 
             Path savePath = Paths.get(uploadFilePath, saveFileName);
 
@@ -39,6 +40,22 @@ public class FeedFileServiceImpl implements FeedFileService {
         }
 
     }
+
+    @Override
+    public List<File> getFeedFiles(int feedId) {
+
+        List<FeedFile> feedFiles = feedFileMapper.getFeedFiles(feedId);
+
+        List<File> files = new ArrayList<>();
+
+        for (FeedFile feedFile : feedFiles) {
+
+            files.add(FileUtil.LoadFile(feedFile.getStoredFileName()));
+        }
+
+        return files;
+    }
+
 
 }
 

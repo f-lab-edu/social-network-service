@@ -8,4 +8,6 @@ import java.util.List;
 public interface FeedService {
 
     void registerFeed(Feed feed, List<MultipartFile> files);
+
+    Feed getFeed(int feedId);
 }
