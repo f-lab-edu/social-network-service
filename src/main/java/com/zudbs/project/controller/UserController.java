@@ -72,7 +72,6 @@ public class UserController {
     public HttpStatus logout(HttpSession httpSession) {
 
         String userId = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
-        fcmPushServiceImpl.removeReceiver(userId);
 
         httpSession.invalidate();
 

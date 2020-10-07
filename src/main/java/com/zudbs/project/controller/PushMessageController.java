@@ -4,10 +4,15 @@ import com.zudbs.project.annotation.CheckLogin;
 import com.zudbs.project.service.PushMessageService;
 import com.zudbs.project.util.SessionKeys;
 import lombok.AllArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.*;
+
+import static com.zudbs.project.util.SessionKeys.USER_DEVICE_TOKEN;
 
 @AllArgsConstructor
 @RestController
@@ -21,7 +26,8 @@ public class PushMessageController {
     public HttpStatus registerToken(@RequestBody String token, HttpSession httpSession) {
 
         String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
-        pushMessageService.registerReceiver(userID, token);
+
+        httpSession.setAttribute(USER_DEVICE_TOKEN, token);
 
         return HttpStatus.OK;
     }
