@@ -9,18 +9,13 @@ import java.nio.file.Path;
 
 public class FileUtil {
 
-    public static void MultipartFileToFile(MultipartFile file, Path path) {
+    public static void multipartFileToFile(MultipartFile file, Path path) {
         try {
             file.transferTo(new File(path.toString()));
 
         } catch (IOException ex) {
 
         }
-    }
-
-    public static File LoadFile(String path) {
-
-        return new File(path);
     }
 
 }

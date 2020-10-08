@@ -43,8 +43,8 @@ public class FeedController {
     }
 
     @CheckLogin
-    @GetMapping("/{userId}/list")
-    public ResponseEntity<List<Feed>> getFeedList(@PathVariable String userId) {
+    @GetMapping
+    public ResponseEntity<List<Feed>> getFeedList(@RequestParam String userId) {
 
         List<Feed> feedList = feedService.getFeedList(userId);
 
@@ -52,7 +52,7 @@ public class FeedController {
     }
 
     @CheckLogin
-    @PutMapping("/{userId}/{feedId}")
+    @PostMapping("/{userId}/{feedId}")
     public HttpStatus updateFeed(@PathVariable String userId, @PathVariable int feedId, String content, List<MultipartFile> files) {
 
         Feed feed = new Feed(feedId, userId, LocalDateTime.now(), content, files.size() != 0);

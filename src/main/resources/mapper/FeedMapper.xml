@@ -10,7 +10,7 @@
 
     <select id="getFeed" resultType="com.zudbs.project.model.Feed">
         SELECT ID, USERID, DATETIME, CONTENT, HASFILE FROM FEED
-        WHERE USERID =#{userId} AND ID =#{feedId}
+        WHERE ID =#{feedId}
     </select>
 
     <select id="getFeedList" resultType="com.zudbs.project.model.Feed">

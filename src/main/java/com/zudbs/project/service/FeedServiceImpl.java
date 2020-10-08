@@ -29,7 +29,7 @@ public class FeedServiceImpl implements FeedService {
     @Override
     public Feed getFeed(String userId, int feedId) {
 
-        Feed feed = feedMapper.getFeed(userId, feedId);
+        Feed feed = feedMapper.getFeed(feedId);
 
         loadFeedFile(feed);
 

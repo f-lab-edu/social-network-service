@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FeedFileServiceImpl implements FeedFileService {
@@ -34,7 +35,7 @@ public class FeedFileServiceImpl implements FeedFileService {
 
             Path savePath = Paths.get(uploadFilePath, saveFileName);
 
-            FileUtil.MultipartFileToFile(file, savePath);
+            FileUtil.multipartFileToFile(file, savePath);
 
             feedFileMapper.saveFeedFile(new FeedFile(index, feedId, file.getOriginalFilename(), savePath.toString(), file.getSize()));
         }
@@ -46,12 +47,9 @@ public class FeedFileServiceImpl implements FeedFileService {
 
         List<FeedFile> feedFiles = feedFileMapper.getFeedFiles(feedId);
 
-        List<File> files = new ArrayList<>();
-
-        for (FeedFile feedFile : feedFiles) {
-
-            files.add(FileUtil.LoadFile(feedFile.getStoredFileName()));
-        }
+        List<File> files = feedFiles.stream().map(feedFile -> {
+            return new File(feedFile.getStoredFileName());
+        }).collect(Collectors.toList());
 
         return files;
     }

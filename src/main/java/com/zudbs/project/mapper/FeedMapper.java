@@ -9,7 +9,7 @@ import java.util.List;
 public interface FeedMapper {
     void registerFeed(Feed feed);
 
-    Feed getFeed(String userId, int feedId);
+    Feed getFeed(int feedId);
 
     List<Feed> getFeedList(String userId);
 
