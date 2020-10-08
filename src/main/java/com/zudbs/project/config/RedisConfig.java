@@ -1,14 +1,20 @@
 package com.zudbs.project.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
+import java.time.Duration;
 
 /*
   Session Clustering
@@ -55,7 +61,9 @@ public class RedisConfig {
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
 
-        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(redisHost, redisPort);
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
+        redisStandaloneConfiguration.setHostName(redisHost);
+        redisStandaloneConfiguration.setPort(redisPort);
 
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration);
 
@@ -85,6 +93,32 @@ public class RedisConfig {
         */
 
         return redisTemplate;
+    }
+
+    /*
+    CacheManager            Spring에서 제공하는 캐시 서비스 추상화
+    RedisCacheManager       Redis를 이용하여 CacheManager 구현한 클래스
+    RedisCacheConfiguration RedisCacheManager 설정
+
+      - serializeKeysWith        : Key 직렬화 관련 설정
+        (StringRedisSerializer - Key 값은 String을 사용하기 때문)
+      - serializeValuesWith      : Value 직렬화 관련 설정
+        (GenericJackson2JsonRedisSerializer - Value 값은 다양한 자료구조 지원하기 위해)
+      - disableCachingNullValues : Null은 캐싱하지 않음
+      - entryTtl                 : 캐시의 기본 유효시간 설정
+        (캐시Key 별 default 유효시간 설정 - RedisCacheManager withInitialCacheConfigurations)
+
+    */
+    @Bean
+    public CacheManager redisCacheManager() {
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+
+        RedisCacheManager redisCacheManager = RedisCacheManager.RedisCacheManagerBuilder.
+                fromConnectionFactory(redisConnectionFactory()).cacheDefaults(redisCacheConfiguration).build();
+
+        return redisCacheManager;
     }
 
 }
