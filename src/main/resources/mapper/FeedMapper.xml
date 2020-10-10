@@ -2,24 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zudbs.project.mapper.FeedMapper">
-
     <insert id="registerFeed" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO FEED (USERID, CONTENT, DATETIME, HASFILE)
+        INSERT INTO FEED (USERID, CONTENT, DATETIME)
         VALUES (#{userId}, #{content}, #{dateTime}, #{hasFile} )
     </insert>
 
     <select id="getFeed" resultType="com.zudbs.project.model.Feed">
-        SELECT ID, USERID, DATETIME, CONTENT, HASFILE FROM FEED
-        WHERE ID =#{feedId}
+        SELECT FEED.ID, USERID, DATETIME, CONTENT, COUNT(FEEDFILE.ID)!=0 AS HASFILE
+        FROM FEED JOIN FEEDFILE ON FEED.ID =FEEDFILE.FEEDID
+        WHERE FEED.ID =#{feedId}
     </select>
 
     <select id="getFeedList" resultType="com.zudbs.project.model.Feed">
-        SELECT ID, USERID, DATETIME, CONTENT, HASFILE FROM FEED
-        WHERE USERID =#{userId}
+        SELECT FEED.ID, USERID, DATETIME, CONTENT, COUNT(FEEDFILE.ID)!=0 AS HASFILE
+        FROM FEED JOIN FEEDFILE ON FEED.ID =FEEDFILE.FEEDID
+        WHERE FEED.USERID =#{userId}
     </select>
 
     <update id="updateFeed">
-        UPDATE FEED SET CONTENT = #{content}, DATETIME =#{dateTime}, HASFILE = #{hasFile}
+        UPDATE FEED SET CONTENT = #{content}, DATETIME =#{dateTime}
         WHERE USERID =#{userId} AND ID = #{id}
     </update>
 
