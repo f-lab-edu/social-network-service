@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +23,9 @@ public class FeedFileServiceImpl implements FeedFileService {
     @Autowired
     private FeedFileMapper feedFileMapper;
 
+    @Autowired
+    private FileUtil fileUtil;
+
     @Override
     public void saveFiles(int feedId, List<MultipartFile> files) {
 
@@ -35,7 +37,7 @@ public class FeedFileServiceImpl implements FeedFileService {
 
             Path savePath = Paths.get(uploadFilePath, saveFileName);
 
-            FileUtil.multipartFileToFile(file, savePath);
+            fileUtil.saveFile(file, savePath);
 
             feedFileMapper.saveFeedFile(new FeedFile(index, feedId, file.getOriginalFilename(), savePath.toString(), file.getSize()));
         }
