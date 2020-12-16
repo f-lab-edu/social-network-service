@@ -14,8 +14,6 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
-import java.time.Duration;
-
 /*
   Session Clustering
    서버가 한대일 경우 WAS에 세션 정보를 담아두고 사용하면 되지만 서버가 N대로 늘어날 경우 늘어난 서버의 ip, port 정보를 N대의 서버에 일
@@ -48,7 +46,6 @@ import java.time.Duration;
    이 필터는 HttpSession 구현체를 Spring Session 으로 교체하는 역할을 하고, 이 Spring Session은 Redis에 저장됩니다.
 
 */
-@EnableRedisHttpSession
 public class RedisConfig {
 
     @Value("${spring.redis.host}")
@@ -66,6 +63,7 @@ public class RedisConfig {
         redisStandaloneConfiguration.setPort(redisPort);
 
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(redisStandaloneConfiguration);
+
 
         return lettuceConnectionFactory;
     }
