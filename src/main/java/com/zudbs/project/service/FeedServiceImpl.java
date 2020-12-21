@@ -51,6 +51,7 @@ public class FeedServiceImpl implements FeedService {
     }
 
     @Transactional
+    @CacheEvict(value = "feeds", key = "#feed.getId") //캐시에서 데이터 제거
     @Override
     public void updateFeed(Feed feed, List<MultipartFile> files) {
 
