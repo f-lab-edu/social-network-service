@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zudbs.project.mapper.FeedFileMapper">
+
+    <insert id="saveFeedFile">
+        INSERT INTO FEEDFILE (FEEDID, ORIGINALFILENAME, STOREDFILENAME, SIZE)
+        VALUES (#{feedId}, #{originalFileName}, #{storedFileName}, #{FileSize} )
+    </insert>
+
+    <select id="getFeedFiles" resultType="com.zudbs.project.model.FeedFile">
+        SELECT ID, FEEDID, ORIGINALFILENAME, STOREDFILENAME, SIZE FROM FEEDFILE
+        WHERE FEEDID = #{feedId}
+    </select>
+
+    <delete id="removeFeedFiles">
+        DELETE FROM FEEDFILE
+        WHERE FEEDID = #{feedId}
+    </delete>
+
+
+</mapper>
