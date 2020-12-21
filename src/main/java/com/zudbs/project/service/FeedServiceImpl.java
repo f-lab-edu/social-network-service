@@ -3,11 +3,13 @@ package com.zudbs.project.service;
 import com.zudbs.project.mapper.FeedMapper;
 import com.zudbs.project.model.Feed;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Key;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,6 +29,7 @@ public class FeedServiceImpl implements FeedService {
         feedFileService.saveFiles(feed.getId(), files);
     }
 
+    @Cacheable(value = "feeds", key = "#feedId")
     @Override
     public Feed getFeed(String userId, int feedId) {
 
@@ -37,6 +40,7 @@ public class FeedServiceImpl implements FeedService {
         return feed;
     }
 
+    @Cacheable(value = "feeds", key = "#userId")
     @Override
     public List<Feed> getFeedList(String userId) {
 
@@ -49,6 +53,7 @@ public class FeedServiceImpl implements FeedService {
 
         return feedList;
     }
+
 
     @Transactional
     @CacheEvict(value = "feeds", key = "#feed.getId") //캐시에서 데이터 제거

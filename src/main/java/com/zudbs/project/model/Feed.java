@@ -3,12 +3,13 @@ package com.zudbs.project.model;
 import lombok.*;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
-public class Feed {
+public class Feed implements Serializable {
 
     private int id;
 
