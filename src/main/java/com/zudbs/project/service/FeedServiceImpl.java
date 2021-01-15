@@ -2,6 +2,7 @@ package com.zudbs.project.service;
 
 import com.zudbs.project.mapper.FeedMapper;
 import com.zudbs.project.model.Feed;
+import com.zudbs.project.model.FeedLike;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Key;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @Service
@@ -77,6 +79,16 @@ public class FeedServiceImpl implements FeedService {
         if (feed.isHasFile()) {
             feed.setFiles(feedFileService.getFeedFiles(feed.getId()));
         }
+    }
+
+    @Override
+    public void addFeedLike(FeedLike like) {
+        feedMapper.addFeedLike(like);
+    }
+
+    @Override
+    public void deleteFeedLike(FeedLike like) {
+        feedMapper.deleteFeedLike(like);
     }
 
 

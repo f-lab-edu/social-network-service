@@ -1,6 +1,7 @@
 package com.zudbs.project.service;
 
 import com.zudbs.project.model.Feed;
+import com.zudbs.project.model.FeedLike;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -16,4 +17,9 @@ public interface FeedService {
     void updateFeed(Feed feed, List<MultipartFile> files);
 
     void deleteFeed(String userId, int feedId);
+
+    void addFeedLike(FeedLike feedLike);
+
+    void deleteFeedLike(FeedLike feedLike);
+
 }
