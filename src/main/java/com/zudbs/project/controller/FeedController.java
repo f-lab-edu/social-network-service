@@ -73,7 +73,7 @@ public class FeedController {
     }
 
     @CheckLogin
-    @PostMapping("/likes/{feedId}")
+    @PostMapping("/likes/{feedId}/likes")
     public HttpStatus addFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable int feedId) {
 
         feedService.addFeedLike( new FeedLike(feedId,userId));
