@@ -22,4 +22,6 @@ public interface FeedMapper {
     void addFeedLike(FeedLike like);
 
     void cancelFeedLike(FeedLike like);
+
+    int getFeedLikesCount(int feedId);
 }
