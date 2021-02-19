@@ -83,9 +83,9 @@ public class FeedController {
 
     @CheckLogin
     @DeleteMapping("/likes/{feedId}")
-    public HttpStatus deleteFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable int feedId) {
+    public HttpStatus cancelFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable int feedId) {
 
-        feedService.deleteFeedLike(new FeedLike(feedId,userId));
+        feedService.cancelFeedLike(new FeedLike(feedId,userId));
 
         return HttpStatus.OK;
     }

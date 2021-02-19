@@ -20,6 +20,6 @@ public interface FeedService {
 
     void addFeedLike(FeedLike feedLike);
 
-    void deleteFeedLike(FeedLike feedLike);
+    void cancelFeedLike(FeedLike feedLike);
 
 }

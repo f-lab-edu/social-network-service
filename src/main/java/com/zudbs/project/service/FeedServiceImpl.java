@@ -87,8 +87,8 @@ public class FeedServiceImpl implements FeedService {
     }
 
     @Override
-    public void deleteFeedLike(FeedLike like) {
-        feedMapper.deleteFeedLike(like);
+    public void cancelFeedLike(FeedLike like) {
+        feedMapper.cancelFeedLike(like);
     }
 
 

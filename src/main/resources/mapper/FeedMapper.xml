@@ -45,7 +45,7 @@
         VALUES (#{feedId}, #{userId})
     </insert>
 
-    <delete id="deleteFeedLike">
+    <delete id="cancelFeedLike">
         DELETE FROM FEEDLIKE
         WHERE FEEDID =#{feedId} AND USERID = #{userId}
     </delete>
