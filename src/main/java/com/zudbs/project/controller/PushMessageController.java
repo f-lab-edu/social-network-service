@@ -27,7 +27,18 @@ public class PushMessageController {
 
         String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
 
-        httpSession.setAttribute(USER_DEVICE_TOKEN, token);
+        pushMessageService.registerReceiver(userID, token);
+
+        return HttpStatus.OK;
+    }
+
+    @CheckLogin
+    @DeleteMapping
+    public HttpStatus removeToken(@RequestBody String token, HttpSession httpSession) {
+
+        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
+
+        pushMessageService.removeReceiver(userID);
 
         return HttpStatus.OK;
     }

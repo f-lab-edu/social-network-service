@@ -10,6 +10,7 @@ import com.google.firebase.messaging.WebpushNotification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -37,7 +38,8 @@ public class FCMPushServiceImpl implements PushMessageService {
     HashTable -> Thread-safe O
     (put,get 메서드를 synchronizeded 하게 구현하여 멀티 스레드를 지원한다.)
    */
-    private Map<String, String> tokenMap = new ConcurrentHashMap<>();
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
 
     @PostConstruct //의존성 주입 후 초기화를 수행하는 메서드
     public void initialize() throws IOException {
@@ -54,11 +56,11 @@ public class FCMPushServiceImpl implements PushMessageService {
 
     public void registerReceiver(String userId, String receiver) {
 
-        tokenMap.put(userId, receiver);
+        redisTemplate.opsForValue().set(userId, receiver);
     }
 
     public void removeReceiver(String userId) {
-        tokenMap.remove(userId);
+        redisTemplate.opsForValue().getOperations().delete(userId);
     }
 
     public void sendPushMessage(String reciver, String title, String content) {
