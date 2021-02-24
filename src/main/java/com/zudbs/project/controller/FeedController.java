@@ -27,9 +27,7 @@ public class FeedController {
     @PostMapping
     public HttpStatus register(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, String content, List<MultipartFile> files) {
 
-        Feed feed = new Feed(userId, LocalDateTime.now(), content, files.size() != 0);
-
-        feedService.registerFeed(feed, files);
+        feedService.registerFeed(new Feed(userId, LocalDateTime.now(), content), files);
 
         return HttpStatus.CREATED;
     }
@@ -56,9 +54,7 @@ public class FeedController {
     @PostMapping("/{userId}/{feedId}")
     public HttpStatus updateFeed(@PathVariable String userId, @PathVariable int feedId, String content, List<MultipartFile> files) {
 
-        Feed feed = new Feed(feedId, userId, LocalDateTime.now(), content, files.size() != 0);
-
-        feedService.updateFeed(feed, files);
+        feedService.updateFeed(new Feed(feedId, userId, LocalDateTime.now(), content), files);
 
         return HttpStatus.OK;
     }
