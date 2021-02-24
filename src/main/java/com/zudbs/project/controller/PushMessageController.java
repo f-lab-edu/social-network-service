@@ -1,18 +1,12 @@
 package com.zudbs.project.controller;
 
 import com.zudbs.project.annotation.CheckLogin;
+import com.zudbs.project.annotation.SessionVariable;
 import com.zudbs.project.service.PushMessageService;
-import com.zudbs.project.util.SessionKeys;
+import com.zudbs.project.util.SessionKey;
 import lombok.AllArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-
-import java.util.*;
-
-import static com.zudbs.project.util.SessionKeys.USER_DEVICE_TOKEN;
 
 @AllArgsConstructor
 @RestController
@@ -23,22 +17,18 @@ public class PushMessageController {
 
     @CheckLogin
     @PostMapping
-    public HttpStatus registerToken(@RequestBody String token, HttpSession httpSession) {
+    public HttpStatus registerToken(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @RequestBody String token) {
 
-        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
-
-        pushMessageService.registerReceiver(userID, token);
+        pushMessageService.registerReceiver(userId, token);
 
         return HttpStatus.OK;
     }
 
     @CheckLogin
     @DeleteMapping
-    public HttpStatus removeToken(@RequestBody String token, HttpSession httpSession) {
+    public HttpStatus removeToken(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @RequestBody String token) {
 
-        String userID = (String) httpSession.getAttribute(SessionKeys.LOGIN_USER_ID);
-
-        pushMessageService.removeReceiver(userID);
+        pushMessageService.removeReceiver(userId);
 
         return HttpStatus.OK;
     }
