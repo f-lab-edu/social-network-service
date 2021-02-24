@@ -5,6 +5,7 @@ import com.zudbs.project.model.Feed;
 import com.zudbs.project.model.FeedLike;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,6 +58,7 @@ public class FeedServiceImpl implements FeedService {
 
 
     @Transactional
+    @CacheEvict(value = "feeds", key = "#feed.getId") //캐시에서 데이터 제거
     @Override
     public void updateFeed(Feed feed, List<MultipartFile> files) {
 
@@ -66,6 +68,7 @@ public class FeedServiceImpl implements FeedService {
     }
 
     @Transactional
+    @CacheEvict(value = "feeds", key = "#feedId")
     @Override
     public void deleteFeed(String userId, int feedId) {
 
