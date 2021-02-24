@@ -1,6 +1,7 @@
 package com.zudbs.project.service;
 
 import com.zudbs.project.model.Feed;
+import com.zudbs.project.model.FeedComment;
 import com.zudbs.project.model.FeedLike;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,5 +22,7 @@ public interface FeedService {
     void addFeedLike(FeedLike feedLike);
 
     void cancelFeedLike(FeedLike feedLike);
+
+    void addFeedComment(FeedComment feedComment);
 
 }

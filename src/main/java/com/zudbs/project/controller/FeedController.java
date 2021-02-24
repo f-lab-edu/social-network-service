@@ -3,6 +3,7 @@ package com.zudbs.project.controller;
 import com.zudbs.project.annotation.CheckLogin;
 import com.zudbs.project.annotation.SessionVariable;
 import com.zudbs.project.model.Feed;
+import com.zudbs.project.model.FeedComment;
 import com.zudbs.project.model.FeedLike;
 import com.zudbs.project.service.FeedService;
 import com.zudbs.project.util.SessionKey;
@@ -83,13 +84,23 @@ public class FeedController {
 
     @CheckLogin
     @DeleteMapping("/likes/{feedId}")
-    public HttpStatus cancelFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable int feedId) {
+    public HttpStatus cancelFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId,
+                                     @PathVariable int feedId) {
 
         feedService.cancelFeedLike(new FeedLike(feedId,userId));
 
         return HttpStatus.OK;
     }
 
+    @CheckLogin
+    @PostMapping("/{feedId}/comments")
+    public HttpStatus addFeedComment(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId,
+                                     @PathVariable int feedId, @RequestParam String comment) {
+
+        feedService.addFeedComment(new FeedComment(feedId,userId,comment));
+
+        return HttpStatus.OK;
+    }
 
 
 }
