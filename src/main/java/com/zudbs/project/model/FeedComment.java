@@ -3,19 +3,25 @@ package com.zudbs.project.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
-
-@AllArgsConstructor
 @Getter
-public class FeedFile {
+public class FeedComment {
     int id;
 
     int feedId;
 
-    String originalFileName;
+    String userId;
 
-    String storedFileName;
+    String comment;
 
-    long FileSize;
+    public FeedComment(int id, int feedId, String userId, String comment) {
+        this(feedId, userId, comment);
+        this.id = id;
+    }
+
+    public FeedComment(int feedId, String userId, String comment) {
+        this.feedId = feedId;
+        this.userId = userId;
+        this.comment=comment;
+    }
 
 }
