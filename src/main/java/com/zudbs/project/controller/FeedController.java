@@ -73,7 +73,7 @@ public class FeedController {
     }
 
     @CheckLogin
-    @PostMapping("/likes/{feedId}/likes")
+    @PostMapping("/{feedId}/likes")
     public HttpStatus addFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable int feedId) {
 
         feedService.addFeedLike( new FeedLike(feedId,userId));
@@ -82,7 +82,7 @@ public class FeedController {
     }
 
     @CheckLogin
-    @DeleteMapping("/likes/{feedId}/likes")
+    @DeleteMapping("/{feedId}/likes")
     public HttpStatus cancelFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable int feedId) {
 
         feedService.cancelFeedLike(new FeedLike(feedId,userId));
