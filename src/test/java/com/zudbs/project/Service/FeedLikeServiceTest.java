@@ -44,8 +44,8 @@ public class FeedLikeServiceTest {
     @Autowired
     FeedMapper feedMapper;
 
-     int feedId;
-     FeedLike feedLike;
+    static int feedId;
+    static FeedLike feedLike;
 
      /*
      BeforeClass : 테스트 클래스 시작시 1번만 실행된다.
@@ -54,7 +54,7 @@ public class FeedLikeServiceTest {
      AfterClass  : 모든 테스트 케이스가 실행된 후 1번만 실행된다.
      */
     @BeforeClass
-    public  void initialize(){
+    public static void initialize(){
         feedId=2;
         feedLike=new FeedLike(feedId,"user");
     }

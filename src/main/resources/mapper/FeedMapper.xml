@@ -50,4 +50,9 @@
         WHERE FEEDID =#{feedId} AND USERID = #{userId}
     </delete>
 
+    <select id="getFeedLikesCount" resultType="int">
+        SELECT COUNT(*) FROM FEEDLIKE
+        WHERE FEEDID =#{feedId}
+    </select>
+
 </mapper>
