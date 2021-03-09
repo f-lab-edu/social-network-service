@@ -1,20 +1,15 @@
 package com.zudbs.project.Service;
 
-import com.zudbs.project.SnsProjectApplication;
-import com.zudbs.project.config.WebConfig;
 import com.zudbs.project.mapper.FeedMapper;
 import com.zudbs.project.model.FeedLike;
 import com.zudbs.project.service.FeedService;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.Classes;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertEquals;
@@ -46,8 +41,8 @@ public class FeedLikeServiceTest {
     @Autowired
     FeedMapper feedMapper;
 
-    static int feedId;
-    static FeedLike feedLike;
+    int feedId;
+    FeedLike feedLike;
 
     /*
     BeforeClass : 테스트 클래스 시작시 1번만 실행된다.
@@ -55,13 +50,14 @@ public class FeedLikeServiceTest {
     After       : 각 테스트 케이스가 실행된 후 실행된다.
     AfterClass  : 모든 테스트 케이스가 실행된 후 1번만 실행된다.
     */
-    @BeforeClass
-    public static void initialize() {
+    @Before
+    public void initialize() {
         feedId = 2;
         feedLike = new FeedLike(feedId, "user");
     }
 
     @Test
+    @DisplayName("좋아요 요청시 좋아요 수 증가")
     public void addLike() {
 
         int likesCount = feedMapper.getFeedLikesCount(feedId);
@@ -74,6 +70,7 @@ public class FeedLikeServiceTest {
     }
 
     @Test
+    @DisplayName("좋아요 취소시 좋아요 수 감소")
     public void cancelLike() {
 
         addLike();
