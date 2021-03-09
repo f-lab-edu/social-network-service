@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class FeedComment {
+
     int id;
 
     int feedId;
@@ -21,7 +22,7 @@ public class FeedComment {
     public FeedComment(int feedId, String userId, String comment) {
         this.feedId = feedId;
         this.userId = userId;
-        this.comment=comment;
+        this.comment = comment;
     }
 
 }

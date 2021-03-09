@@ -94,12 +94,11 @@ public class FeedController {
 
     @CheckLogin
     @PostMapping("/{feedId}/comments")
-    public HttpStatus addFeedComment(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId,
+    public void addFeedComment(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId,
                                      @PathVariable int feedId, @RequestParam String comment) {
 
         feedService.addFeedComment(new FeedComment(feedId,userId,comment));
 
-        return HttpStatus.OK;
     }
 
 
