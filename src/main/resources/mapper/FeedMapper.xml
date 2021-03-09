@@ -52,7 +52,7 @@
 
     <select id="getFeedLikesCount" resultType="int">
         SELECT COUNT(*) FROM FEEDLIKE
-        WHERE FEEDID =#{feedId}
+        WHERE FEEDID = #{feedId}
     </select>
 
 </mapper>
