@@ -10,7 +10,7 @@
         <id column="content" property="content"/>
         <id column="hasFile" property="hasFile"/>
         <collection column="likes" property="likes" javaType="java.util.ArrayList"
-                    ofType="java.lang.String" />
+                    ofType="java.lang.String"/>
     </resultMap>
 
 
@@ -55,9 +55,14 @@
         WHERE FEEDID =#{feedId}
     </select>
 
-    <insert id="addFeedCommnet" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addFeedComment" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO FEEDCOMMENT (FEEDID, USERID, COMMENT)
         VALUES (#{feedId}, #{userId}, #{comment})
     </insert>
+
+    <select id="getFeedCommnet" resultType="com.zudbs.project.model.FeedComment">
+        SELECT ID, FEEDID, USERID, COMMENT FROM FEEDCOMMENT
+        WHERE ID = #{ID}
+    </select>
 
 </mapper>

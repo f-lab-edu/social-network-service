@@ -26,5 +26,7 @@ public interface FeedMapper {
 
     int getFeedLikesCount(int feedId);
 
-    void addFeedCommnet(FeedComment comment);
+    void addFeedComment(FeedComment comment);
+
+    FeedComment getFeedCommnet(int commentId);
 }

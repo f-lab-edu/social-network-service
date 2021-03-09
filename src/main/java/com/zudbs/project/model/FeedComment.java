@@ -1,6 +1,5 @@
 package com.zudbs.project.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter

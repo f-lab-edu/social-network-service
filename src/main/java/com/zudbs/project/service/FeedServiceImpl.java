@@ -96,7 +96,7 @@ public class FeedServiceImpl implements FeedService {
     @Override
     public void addFeedComment(FeedComment comment) {
 
-        feedMapper.addFeedCommnet(comment);
+        feedMapper.addFeedComment(comment);
     }
 
 }
