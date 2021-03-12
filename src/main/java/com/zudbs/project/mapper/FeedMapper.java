@@ -1,6 +1,7 @@
 package com.zudbs.project.mapper;
 
 import com.zudbs.project.model.Feed;
+import com.zudbs.project.model.FeedComment;
 import com.zudbs.project.model.FeedLike;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -24,4 +25,6 @@ public interface FeedMapper {
     void cancelFeedLike(FeedLike like);
 
     int getFeedLikesCount(int feedId);
+
+    void addFeedCommnet(FeedComment comment);
 }

@@ -2,6 +2,7 @@ package com.zudbs.project.service;
 
 import com.zudbs.project.mapper.FeedMapper;
 import com.zudbs.project.model.Feed;
+import com.zudbs.project.model.FeedComment;
 import com.zudbs.project.model.FeedLike;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -83,6 +84,7 @@ public class FeedServiceImpl implements FeedService {
 
     @Override
     public void addFeedLike(FeedLike like) {
+
         feedMapper.addFeedLike(like);
     }
 
@@ -91,5 +93,10 @@ public class FeedServiceImpl implements FeedService {
         feedMapper.cancelFeedLike(like);
     }
 
+    @Override
+    public void addFeedComment(FeedComment comment) {
+
+        feedMapper.addFeedCommnet(comment);
+    }
 
 }

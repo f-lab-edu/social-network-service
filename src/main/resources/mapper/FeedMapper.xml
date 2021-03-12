@@ -55,4 +55,9 @@
         WHERE FEEDID = #{feedId}
     </select>
 
+    <insert id="addFeedCommnet" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO FEEDCOMMENT (FEEDID, USERID, COMMENT)
+        VALUES (#{feedId}, #{userId}, #{comment})
+    </insert>
+
 </mapper>
