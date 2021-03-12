@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -38,6 +38,23 @@ public class FeedCommentServiceTest {
 
         assertEquals(feedComment.getUserId(), selectComment.getUserId());
         assertEquals(feedComment.getComment(), selectComment.getComment());
+
+    }
+
+    @Test
+    @DisplayName("댓글 삭제시 데이터가 데이터베이스에서 삭제되어야한다")
+    public void deleteComment() {
+
+        int CommentId = 7;
+
+        FeedComment Comment = feedMapper.getFeedCommnet(CommentId);
+
+        feedService.deleteFeedComment(CommentId);
+
+        FeedComment deleteComment = feedMapper.getFeedCommnet(CommentId);
+
+        assertNotNull(Comment);
+        assertNull(deleteComment);
 
     }
 
