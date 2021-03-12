@@ -58,4 +58,22 @@ public class FeedCommentServiceTest {
 
     }
 
+    @Test
+    @DisplayName("댓글 수정시 데이터가 데이터베이스에서 정상적으로 수정되어야한다")
+    public void updateComment() {
+
+        int CommentId = 7;
+        String updateCommentStr = "댓글 수정 테스트";
+
+        FeedComment Comment = feedMapper.getFeedCommnet(CommentId);
+
+        feedService.updateFeedComment(CommentId, updateCommentStr);
+
+        FeedComment updateComment = feedMapper.getFeedCommnet(CommentId);
+
+        assertNotEquals(Comment.getComment(), updateComment.getComment());
+        assertEquals(updateCommentStr, updateComment.getComment());
+
+    }
+
 }
