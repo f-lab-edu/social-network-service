@@ -27,7 +27,7 @@ public class FeedCommentServiceTest {
     FeedMapper feedMapper;
 
     @Test
-    @DisplayName("댓글 추가시 댓글 내용 비교")
+    @DisplayName("댓글 추가 시 데이터가 정상적으로 데이터베이스에 저장되어야한다")
     public void addComment() {
 
         FeedComment feedComment = new FeedComment(2, "user", "Comment");
