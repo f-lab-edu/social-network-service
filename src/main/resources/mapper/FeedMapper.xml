@@ -65,4 +65,8 @@
         WHERE ID = #{ID}
     </select>
 
+    <delete id="deleteFeedComment">
+        DELETE FROM FEEDCOMMENT WHERE ID =#{commentId}
+    </delete>
+
 </mapper>

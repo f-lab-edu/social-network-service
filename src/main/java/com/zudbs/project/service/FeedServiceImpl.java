@@ -99,4 +99,10 @@ public class FeedServiceImpl implements FeedService {
         feedMapper.addFeedComment(comment);
     }
 
+    @Override
+    public void deleteFeedComment(int commentId) {
+
+        feedMapper.deleteFeedComment(commentId);
+    }
+
 }

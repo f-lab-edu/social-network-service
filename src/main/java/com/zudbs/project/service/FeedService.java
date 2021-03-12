@@ -25,4 +25,6 @@ public interface FeedService {
 
     void addFeedComment(FeedComment feedComment);
 
+    void deleteFeedComment(int commentId);
+
 }

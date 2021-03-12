@@ -77,7 +77,7 @@ public class FeedController {
     @PostMapping("/likes/{feedId}/likes")
     public HttpStatus addFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId, @PathVariable int feedId) {
 
-        feedService.addFeedLike( new FeedLike(feedId,userId));
+        feedService.addFeedLike(new FeedLike(feedId, userId));
 
         return HttpStatus.OK;
     }
@@ -87,7 +87,7 @@ public class FeedController {
     public HttpStatus cancelFeedLike(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId,
                                      @PathVariable int feedId) {
 
-        feedService.cancelFeedLike(new FeedLike(feedId,userId));
+        feedService.cancelFeedLike(new FeedLike(feedId, userId));
 
         return HttpStatus.OK;
     }
@@ -95,9 +95,17 @@ public class FeedController {
     @CheckLogin
     @PostMapping("/{feedId}/comments")
     public void addFeedComment(@SessionVariable(SessionKey.LOGIN_USER_ID) String userId,
-                                     @PathVariable int feedId, @RequestParam String comment) {
+                               @PathVariable int feedId, @RequestParam String comment) {
 
-        feedService.addFeedComment(new FeedComment(feedId,userId,comment));
+        feedService.addFeedComment(new FeedComment(feedId, userId, comment));
+
+    }
+
+    @CheckLogin
+    @DeleteMapping("/{feedId}/comments")
+    public void deleteFeedComment(@RequestParam int commentId) {
+
+        feedService.deleteFeedComment(commentId);
 
     }
 
