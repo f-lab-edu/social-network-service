@@ -27,4 +27,5 @@ public interface FeedService {
 
     void deleteFeedComment(int commentId);
 
+    void updateFeedComment(int commentId, String comment);
 }

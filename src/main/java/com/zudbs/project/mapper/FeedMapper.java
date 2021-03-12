@@ -31,4 +31,6 @@ public interface FeedMapper {
     FeedComment getFeedCommnet(int commentId);
 
     void deleteFeedComment(int commentId);
+
+    void updateFeedComment(int commentId, String comment);
 }

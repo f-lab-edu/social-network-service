@@ -69,4 +69,8 @@
         DELETE FROM FEEDCOMMENT WHERE ID =#{commentId}
     </delete>
 
+    <update id="updateFeedComment">
+        UPDATE FEEDCOMMENT SET COMMENT = #{comment} WHERE ID = #{commentId}
+    </update>
+
 </mapper>

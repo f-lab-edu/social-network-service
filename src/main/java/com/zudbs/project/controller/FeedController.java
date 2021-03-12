@@ -109,5 +109,12 @@ public class FeedController {
 
     }
 
+    @CheckLogin
+    @PostMapping("/{feedId}/comments/{commentId}")
+    public void updateComment(@PathVariable int commentId, @RequestParam String comment) {
+
+        feedService.updateFeedComment(commentId, comment);
+
+    }
 
 }

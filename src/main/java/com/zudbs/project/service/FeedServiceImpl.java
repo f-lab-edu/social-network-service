@@ -105,4 +105,10 @@ public class FeedServiceImpl implements FeedService {
         feedMapper.deleteFeedComment(commentId);
     }
 
+    @Override
+    public void updateFeedComment(int commentId, String comment) {
+
+        feedMapper.updateFeedComment(commentId, comment);
+    }
+
 }
